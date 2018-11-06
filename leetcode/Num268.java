@@ -2,19 +2,43 @@ package leetcode;
 
 public class Num268 {
 	/**
-	 * Õâ¸öÎÊÌâºÜ¼òµ¥£¬[0...n]µÄËùÓĞÔªËØÖ®ºÍÊÇÒÑÖªµÄ£¬¼´Îª(nums.length+1)*nums.length/2,¶ønumsÊı×éÖĞÔªËØÖ®ºÍÓë(nums.length+1)*nums.length/2Ö®²î¼´ÎªËùÇó
+	 * è¿™ä¸ªé—®é¢˜å¾ˆç®€å•ï¼Œ[0...n]çš„æ‰€æœ‰å…ƒç´ ä¹‹å’Œæ˜¯å·²çŸ¥çš„ï¼Œå³ä¸º(nums.length+1)*nums.length/2,è€Œnumsæ•°ç»„ä¸­å…ƒç´ ä¹‹å’Œä¸(nums.length+1)*nums.length/2ä¹‹å·®å³ä¸ºæ‰€æ±‚
 	 * @param nums
 	 * @return
 	 */
-    public int missingNumber(int[] nums) {
-        int sum=(nums.length+1)*nums.length/2;
-        int act_sum=0;
-        for(int i=0; i<nums.length; i++){
-            act_sum+=nums[i];
-        }
-        
-        return sum-act_sum;
-    }
+	 public int missingNumber(int[] nums) {
+	 	int sum=(nums.length+1)*nums.length/2;
+		int act_sum=0;
+		for(int i=0; i<nums.length; i++){
+		    act_sum+=nums[i];
+		}
+
+		return sum-act_sum;
+	 }
+	
+	    
+	/**
+	 * è¿™ä¸ªæ–¹æ³•åˆ©ç”¨çš„æ˜¯å¼‚æˆ–æ“ä½œæ¥å®Œæˆå¯¹ç¼ºå¤±å€¼çš„å¯»æ‰¾ï¼š
+	 *  if we initialize an integer to n and XOR it with every index and value, we will be left with the missing number
+	 *  ä¾‹å¦‚ï¼š
+	 *  	æ•°ç»„a: 0 1 3 4
+	 *  	index: 0 1 2 3
+	 *  	ç¼ºå¤±å€¼missing = 4^(0^0)^(1^1)^(3^2)^(4^3)
+	 *  				  = 4^1^7
+	 *  				  = 5^7
+	 *  				  = 2
+	 * @param nums
+	 * @return
+	 */
+	public int missingNumber(int[] nums) {
+    		int missing = nums.length;
+    		for (int i = 0; i < nums.length; i++) {
+        		missing ^= i ^ nums[i];
+    		}
+    		return missing;
+	}
+	
+	
 	
 	
 	public static void main(String[] args) {
